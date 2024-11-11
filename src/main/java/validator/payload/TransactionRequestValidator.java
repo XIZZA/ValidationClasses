@@ -13,7 +13,7 @@ public class TransactionRequestValidator {
     private static final Set<String> SUPPORTED_CURRENCIES = Set.of("USD", "EUR", "KES");
 
     // Validation logic
-    private boolean validate(Transaction transaction) {
+    public boolean validate(Transaction transaction) {
         return transaction.getAmount() > 0 &&
                 transaction.getSid() > 0 &&
                 transaction.getManager() != null && transaction.getManager().matches("\\d+") &&

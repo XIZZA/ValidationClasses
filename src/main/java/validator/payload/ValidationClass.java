@@ -8,6 +8,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
 
@@ -16,6 +18,8 @@ public class ValidationClass {
     @JsonProperty
     private Integer user;
 
+    @Setter
+    @Getter
     @NotBlank
     @JsonProperty
     private String password;
@@ -24,6 +28,8 @@ public class ValidationClass {
     @JsonProperty
     private Integer sid;
 
+    @Getter
+    @Setter
     @NotBlank
     @JsonProperty
     private String groupName;
@@ -39,6 +45,8 @@ public class ValidationClass {
     @JsonProperty
     private Boolean readOnly;
 
+    @Getter
+    @Setter
     @JsonProperty
     @NotNull(message = "Custom fields cannot be null")
     @Valid
@@ -46,7 +54,7 @@ public class ValidationClass {
             @NotBlank(message = "Custom field value cannot be blank") String> customFields;
 
 
-    private boolean validateBody(String jsonPayload) throws JsonParseException {
+    boolean validateBody(String jsonPayload) throws JsonParseException {
         ObjectMapper mapper = new ObjectMapper();
         try {
             var data = mapper.readValue(jsonPayload, Map.class);
@@ -66,5 +74,24 @@ public class ValidationClass {
             return false;
         }
     }
-
+    public void setUser(Object user) {
+        this.user = (Integer) user;
+    }
+    public Object getUser() {
+        return user;
+    }
+    public void setSid(Object sid) {
+        this.sid = (Integer) sid;
+    }
+    public Object getSid() {
+        return sid;
+    }
+    public void setInitialBalance(int initialBalance) {
+        this.initialBalance = initialBalance;
+    }
+    public int getInitialBalance() {
+        return initialBalance;
+    }
+    public void setCustomFields(Map<String, String> customFields) {
+    }
 }

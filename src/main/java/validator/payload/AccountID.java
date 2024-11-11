@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,8 @@ public class AccountID {
     }
 
     // Nested static class for the request payload, combining model and validation
+    @Getter
+    @Setter
     public static class AccountRequest {
         @NotBlank @Pattern(regexp = "^\\d+$", message = "Account ID must be a numeric string.")
         @JsonProperty private String accountId;
@@ -43,6 +47,7 @@ public class AccountID {
         public AccountRequest(@JsonProperty("accountId") String accountId) {
             this.accountId = accountId;
         }
+
     }
 }
 
